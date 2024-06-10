@@ -3,16 +3,14 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import * as WebTorrent from 'webtorrent';
-
+import WebTorrent from 'webtorrent'
 
 function App() {
   const [count, setCount] = useState(0)
-  let client
 
   useEffect(() => {
-    //  client = new WebTorrent()
-    // console.log('WebTorrent', WebTorrent);
+    const client = new WebTorrent()
+    console.log('client', client);
   }, [])
 
   return (
