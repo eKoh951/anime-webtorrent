@@ -56,24 +56,13 @@ export function useTorrentStream(torrentId: string) {
 			if (!isMounted || !client) return;
 			console.log('download...');
 
-			client.add(torrentId, (torrent: any) => {
+			client.add(torrentId, async (torrent: any) => {
 				setTorrent(torrent);
 
 				const file = torrent.files.find((file: any) => file.name.endsWith('.mp4'));
 				
 				if (file) {
-					if (torrent.done) {
-						console.log('Torrent already downloaded');
-						const videoUrl = file.streamURL;
-						const videoElement = document.querySelector('#output') as HTMLVideoElement;
-						if (videoElement) {
-							videoElement.src = videoUrl;
-							videoElement.play();
-						}
-					} else {
-						console.log('Downloading torrent');
-						file.streamTo(document.querySelector('#output'));
-					}
+					file.streamTo(document.querySelector('#output'));
 				}
 
 				torrent.on('done', onDone);
@@ -98,7 +87,16 @@ export function useTorrentStream(torrentId: string) {
 					setRemaining(remaining);
 				}
 
-				function onDone() {
+				async function onDone() {
+					const videoBlob = await file.blob()
+					const videoUrl = URL.createObjectURL(videoBlob);
+					const videoElement = document.querySelector('#output') as HTMLVideoElement;
+
+					if (videoElement) {
+						videoElement.src = videoUrl;
+						videoElement.play();
+					}
+
 					onProgress();
 				}
 			});
