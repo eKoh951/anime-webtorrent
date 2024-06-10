@@ -60,7 +60,21 @@ export function useTorrentStream(torrentId: string) {
 				setTorrent(torrent);
 
 				const file = torrent.files.find((file: any) => file.name.endsWith('.mp4'));
-				file.streamTo(document.querySelector('#output'));
+				
+				if (file) {
+					if (torrent.done) {
+						console.log('Torrent already downloaded');
+						const videoUrl = file.streamURL;
+						const videoElement = document.querySelector('#output') as HTMLVideoElement;
+						if (videoElement) {
+							videoElement.src = videoUrl;
+							videoElement.play();
+						}
+					} else {
+						console.log('Downloading torrent');
+						file.streamTo(document.querySelector('#output'));
+					}
+				}
 
 				torrent.on('done', onDone);
 				setInterval(onProgress, 500);

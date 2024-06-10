@@ -16,8 +16,10 @@
     "webtorrent": "^2.4.0"
   },
   "devDependencies": {
+    "@types/moment": "^2.13.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "@types/webtorrent": "^0.109.8",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",

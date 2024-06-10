@@ -11,7 +11,7 @@ function App() {
     <div className="app">
       <div>
         <div id="progressBar" style={{ width: `${progress}%` }}></div>
-        <video id="output" controls></video>
+        <video id="output" controls autoPlay></video>
       </div>
       <div id="status">
         <div>
