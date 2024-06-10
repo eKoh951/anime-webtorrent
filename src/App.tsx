@@ -4,8 +4,20 @@ import './App.css';
 import { useTorrentStream } from './useTorrentStream';
 
 function App() {
-  const [torrentId, setTorrentId] = useState('https://webtorrent.io/torrents/sintel.torrent');
-  const { torrent, progress, downloadSpeed, uploadSpeed, numPeers, downloaded, total, remaining } = useTorrentStream(torrentId);
+  const [torrentId, setTorrentId] = useState(
+    'https://webtorrent.io/torrents/sintel.torrent'
+  );
+
+  const {
+    torrent,
+    progress,
+    downloadSpeed,
+    uploadSpeed,
+    numPeers,
+    downloaded,
+    total,
+    remaining,
+  } = useTorrentStream(torrentId);
 
   return (
     <div className="app">
@@ -30,11 +42,11 @@ function App() {
         </div>
         <div>
           <code id="downloaded">{downloaded}</code>
-          of <code id="total">{total}</code>
-          — <span id="remaining">{remaining}</span>
+          of <code id="total">{total}</code>—{' '}
+          <span id="remaining">{remaining}</span>
           <br />
-          &#x2198;<code id="downloadSpeed">{downloadSpeed}/s</code>
-          / &#x2197;<code id="uploadSpeed">{uploadSpeed}/s</code>
+          &#x2198;<code id="downloadSpeed">{downloadSpeed}/s</code>/ &#x2197;
+          <code id="uploadSpeed">{uploadSpeed}/s</code>
         </div>
       </div>
     </div>
